@@ -5,6 +5,9 @@ const app = express();
 
 app.use(express.json());
 
+app.set("view engine", "ejs");
+app.set("views", "src/views");
+
 app.use((req, res, next) => {
   console.log(`Request Type: ${req.method}`);
   console.log(`Content Type: ${req.headers["content-type"]}`);
@@ -13,10 +16,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.get("/home", (req, res) => {
-//   res.setHeader("Content-Type", "text/html");
-//   res.status(200).send("<h1> Hello, world! </h1>");
-// })
+app.get("/views/users", async (req, res) => {
+  const users = await UserModel.find({});
+
+  res.render("index", { users });
+});
 
 // Buscar todos os usuários.
 app.get("/users", async (req, res) => {
