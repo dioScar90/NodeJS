@@ -91,4 +91,4 @@ app.post("/users", async (req, res) => {
 
 const port = 8080;
 
-app.listen(port, () => console.log(`Listening with Express at port ${port} and ${__dirname} !`));
+app.listen(port, () => console.log(`Listening with Express at port ${port}!`));
