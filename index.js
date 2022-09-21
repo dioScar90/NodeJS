@@ -10,6 +10,6 @@ connectToDatabase();
 // require("./modules/path");
 // require("./modules/fs");
 // require("./modules/http");
-require("./modules/routes");
+require("./modules/express");
 
 // const person = new Person("Diogo");
