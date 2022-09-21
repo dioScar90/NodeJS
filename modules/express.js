@@ -4,7 +4,7 @@ const UserModel = require("../src/models/user.model");
 const app = express();
 
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 
 app.set("view engine", "ejs");
 app.set("views", "src/views");
@@ -77,21 +77,6 @@ app.delete("/users/:id", async (req, res) => {
   }
 });
 
-// app.get("/users", (req, res) => {
-//   const users = [
-//     {
-//       name: "John Doe",
-//       email: "john@doe.com",
-//     },
-//     {
-//       name: "Jane Doe",
-//       email: "jane@doe.com",
-//     }
-//   ];
-
-//   res.status(200).json(users);
-// });
-
 // Criar usuário.
 app.post("/users", async (req, res) => {
   try {
@@ -106,4 +91,4 @@ app.post("/users", async (req, res) => {
 
 const port = 8080;
 
-app.listen(port, () => console.log(`Listening with Express at port ${port}!`));
+app.listen(port, () => console.log(`Listening with Express at port ${port} and ${__dirname} !`));
