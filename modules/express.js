@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const UserModel = require("../src/models/user.model");
 
 const app = express();
@@ -6,6 +7,9 @@ const app = express();
 app.use(express.json());
 // app.use(routes);
 app.use(express.static(__dirname + "/public"));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.set("view engine", "ejs");
 app.set("views", "src/views");
@@ -18,11 +22,26 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/", async (req, res) => {
+  res.end("<p>home page</p>");
+})
+
+app.post("/salvarperguntas", async (req, res) => {
+  const titulo = req.body.titulo;
+  const descricao = req.body.descricao;
+
+  res.send(`Formulário recebido! Título: ${titulo}, Descrição: ${descricao}.`);
+})
+
 app.get("/views/users", async (req, res) => {
   const users = await UserModel.find({});
 
   res.render("index", { users });
 });
+
+app.get("/perguntas", async (req, res) => {
+  res.render("perguntar");
+})
 
 // Buscar todos os usuários.
 app.get("/users", async (req, res) => {
